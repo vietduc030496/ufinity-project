@@ -6,11 +6,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Created on October, 2022
+ * Created on Duc.NguyenViet, 2023
  *
- * @author Faruk
+ * @author Duc.NguyenViet
  */
-
 @Getter
 @Setter
 @Configuration

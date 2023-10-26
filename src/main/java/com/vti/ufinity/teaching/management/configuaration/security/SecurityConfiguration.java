@@ -51,46 +51,17 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        //@formatter:off
-
-//        return http.csrf(AbstractHttpConfigurer::disable)
-//                   .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-//                   .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
-//                   .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                   .authorizeHttpRequests(requests -> requests
-//                       .requestMatchers(AUTH_WHITELIST).permitAll()
-//                       .anyRequest().authenticated()).build();
-
         http
             .csrf(AbstractHttpConfigurer::disable)
             .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
             .authorizeHttpRequests(requests -> requests
-                                   .requestMatchers(AUTH_WHITELIST).permitAll()
-                                   .anyRequest().authenticated()
-                              );
-
-        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                                       .requestMatchers(AUTH_WHITELIST).permitAll()
+                                       .anyRequest().authenticated()
+                                  );
 
         return http.build();
-
-
-        //@formatter:on
     }
-
-//	@Bean
-//	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//		http.csrf(csrf -> csrf.disable())
-//			.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
-//			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//			.authorizeHttpRequests(auth -> auth.requestMatchers(AUTH_WHITELIST).permitAll()
-//											   .requestMatchers("/api/test/**").permitAll()
-//											   .anyRequest().authenticated());
-//
-//		// http....;
-//
-//		return http.build();
-//	}
-
 
 }

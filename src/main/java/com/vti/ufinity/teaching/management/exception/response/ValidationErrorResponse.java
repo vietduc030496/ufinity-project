@@ -1,4 +1,4 @@
-package com.vti.ufinity.teaching.management.exception;
+package com.vti.ufinity.teaching.management.exception.response;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import org.springframework.http.HttpStatus;
 
 /**
@@ -16,14 +17,9 @@ import org.springframework.http.HttpStatus;
  */
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class ValidationErrorResponse {
+@SuperBuilder
+public class ValidationErrorResponse extends BaseErrorResponse {
 
-	private HttpStatus status;
-
-	private LocalDateTime time;
-
-	private List<String> message;
+	private List<String> messages;
 
 }

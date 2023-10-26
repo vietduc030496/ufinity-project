@@ -9,4 +9,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Duc.NguyenViet
  */
 public interface TeacherRepository extends JpaRepository<Teacher, Long> {
+
+    boolean existsByEmail(String email);
+
+    boolean existsByEmailAndIdNot(String email, Long id);
 }

@@ -26,11 +26,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "USERS")
-public class User {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+public class User extends BaseEntity {
 
 	private String name;
 
@@ -38,8 +34,6 @@ public class User {
 	private String username;
 
 	private String password;
-
-	private String email;
 
 	@Enumerated(EnumType.STRING)
 	private UserRole userRole; // Enum: USER and ADMIN

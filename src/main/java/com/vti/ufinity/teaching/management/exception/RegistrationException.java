@@ -1,17 +1,12 @@
 package com.vti.ufinity.teaching.management.exception;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.experimental.StandardException;
 
 /**
  * Created on Duc.NguyenViet, 2023
  *
  * @author Duc.NguyenViet
  */
-@Getter
-@RequiredArgsConstructor
-public class RegistrationException extends RuntimeException {
-
-	private final String errorMessage;
-
+@StandardException
+public class RegistrationException extends BadRequestException {
 }

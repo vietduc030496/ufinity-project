@@ -1,0 +1,7 @@
+package com.vti.ufinity.teaching.management.exception;
+
+import lombok.experimental.StandardException;
+
+@StandardException
+public class BadRequestException extends RuntimeException {
+}

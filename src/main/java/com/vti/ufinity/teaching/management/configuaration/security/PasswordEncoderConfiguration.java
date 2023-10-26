@@ -5,11 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
- * Created on March, 2023
+ * Created on Duc.NguyenViet, 2023
  *
- * @author Faruk
+ * @author Duc.NguyenViet
  */
-
 @Configuration
 public class PasswordEncoderConfiguration {
 

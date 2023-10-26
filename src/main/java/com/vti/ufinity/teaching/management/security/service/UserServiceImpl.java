@@ -7,8 +7,8 @@ import com.vti.ufinity.teaching.management.security.dto.AuthenticatedUserDto;
 import com.vti.ufinity.teaching.management.security.dto.RegistrationRequest;
 import com.vti.ufinity.teaching.management.security.dto.RegistrationResponse;
 import com.vti.ufinity.teaching.management.security.mapper.UserMapper;
-import com.vti.ufinity.teaching.management.service.UserValidationService;
-import com.vti.ufinity.teaching.management.utils.GeneralMessageAccessor;
+import com.vti.ufinity.teaching.management.service.validation.UserValidationService;
+import com.vti.ufinity.teaching.management.utils.message.GeneralMessageAccessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 		userRepository.save(user);
 
 		final String username = registrationRequest.getUsername();
-		final String registrationSuccessMessage = generalMessageAccessor.getMessage(null, REGISTRATION_SUCCESSFUL, username);
+		final String registrationSuccessMessage = generalMessageAccessor.getMessage(REGISTRATION_SUCCESSFUL, username);
 
 		log.info("{} registered successfully!", username);
 

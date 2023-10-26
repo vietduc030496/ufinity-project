@@ -1,6 +1,6 @@
 package com.vti.ufinity.teaching.management.model;
 
-import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,11 +22,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Class {
+public class Class extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String name;
 
     @ManyToOne
     private Teacher teacher;
@@ -34,5 +33,5 @@ public class Class {
     private Subject subject;
 
     @ManyToMany
-    private List<Student> students;
+    private Set<Student> students;
 }

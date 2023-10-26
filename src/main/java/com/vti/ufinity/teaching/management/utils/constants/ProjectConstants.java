@@ -1,4 +1,4 @@
-package com.vti.ufinity.teaching.management.utils;
+package com.vti.ufinity.teaching.management.utils.constants;
 
 import java.util.Locale;
 

@@ -5,15 +5,17 @@ import java.util.Optional;
 
 import com.vti.ufinity.teaching.management.model.dto.BaseDTO;
 
+/**
+ * Created on Duc.NguyenViet, 2023
+ *
+ * @author Duc.NguyenViet
+ */
 public interface CrudService <T extends BaseDTO>{
 
     List<T> findAll();
 
     Optional<T> findById(Long id);
 
-    T save(T dto);
-
     void delete(Long id);
 
-    T update(Long id, T dto);
 }
