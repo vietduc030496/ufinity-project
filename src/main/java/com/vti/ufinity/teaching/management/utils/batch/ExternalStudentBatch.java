@@ -38,7 +38,7 @@ public class ExternalStudentBatch {
      * @throws IOException
      */
     @Scheduled(cron = "0 0 12 * * ?")
-    @Transactional
+    @Transactional(rollbackFor = {Exception.class, Throwable.class})
     public void insertExternalStudent() throws IOException {
         FileInputStream inputStream = null;
         BufferedReader reader = null;
