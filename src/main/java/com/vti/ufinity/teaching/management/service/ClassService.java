@@ -18,7 +18,6 @@ import com.vti.ufinity.teaching.management.repository.ClassRepository;
 import com.vti.ufinity.teaching.management.repository.SubjectRepository;
 import com.vti.ufinity.teaching.management.repository.TeacherRepository;
 import com.vti.ufinity.teaching.management.service.validation.ClassValidationService;
-import com.vti.ufinity.teaching.management.utils.message.ExceptionMessageAccessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -42,8 +41,6 @@ public class ClassService implements CrudService<ClassDTO>{
     private final TeacherRepository teacherRepository;
 
     private final ClassValidationService validationService;
-
-    private ExceptionMessageAccessor exceptionMessageAccessor;
 
     @Override
     public List<ClassDTO> findAll() {

@@ -20,6 +20,12 @@ spring:
       properties:
         hibernate.use_sql_comments: true
         hibernate.format_sql: true
+    properties:
+      hibernate:
+        generate_statistics: true
+        jdbc:
+          batch_size: 10
+        order_inserts: true
 
 springdoc:
   show-actuator: true
@@ -45,14 +51,14 @@ logging:
 jwt:
   secretKey: secret
   issuer: vti.com.vn
-  expirationMinute: 1000
+  expirationMinute: 10080 # one week
 
 swagger:
-  contact-name: Faruk Genc
-  contact-mail: omer@farukgenc.com
-  contact-url: https://farukgenc.com
-  app-name: Spring Boot Boilerplate Project
-  app-description: "Spring Boot Boilerplate is a starter kit. This project includes : Spring Boot(2.7.4), Spring Data JPA, Spring Validation, Spring Security + JWT Token, PostgreSQL, Mapstruct, Lombok, Swagger"
-  app-version: 2.0.0
+  contact-name: VTI
+  contact-mail: duc.nguyenviet@vti.com.vn
+  contact-url: https://vti.com.vn/
+  app-name: Spring Boot Teaching System Project
+  app-description: "Spring Boot Boilerplate is a starter kit. This project includes : Spring Boot, Spring Data JPA, Spring Validation, Spring Security + JWT Token, PostgreSQL, Mapstruct, Lombok, Swagger"
+  app-version: 1.0.0
   app-license-url: https://www.apache.org/licenses/LICENSE-2.0.html
   app-license: Apache 2.0

@@ -1,5 +1,7 @@
 package com.vti.ufinity.teaching.management.controller.web.request;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -8,7 +10,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ClassRegisterRequest {
+public class ClassRegisterRequest implements Serializable {
 
     @NotEmpty(message = "{registration_name_not_empty}")
     private String name;

@@ -1,17 +1,14 @@
 package com.vti.ufinity.teaching.management.service;
 
-import static com.vti.ufinity.teaching.management.utils.constants.MessageCodeConstants.EMAIL_ALREADY_EXISTS;
 import static com.vti.ufinity.teaching.management.utils.constants.MessageCodeConstants.RESOURCE_NOT_FOUND;
 import static com.vti.ufinity.teaching.management.utils.constants.MessageCodeConstants.STUDENT_ENROLLED;
 import static com.vti.ufinity.teaching.management.utils.constants.MessageCodeConstants.UPDATE_SUCCESSFUL;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import com.vti.ufinity.teaching.management.controller.web.request.StudentRegisterRequest;
-import com.vti.ufinity.teaching.management.exception.RegistrationException;
 import com.vti.ufinity.teaching.management.exception.ResourceNotFoundException;
 import com.vti.ufinity.teaching.management.model.Class;
 import com.vti.ufinity.teaching.management.model.Student;
@@ -64,7 +61,7 @@ public class StudentService implements CrudService<StudentDTO> {
     @Transactional
     public StudentDTO save(StudentRegisterRequest body) {
 
-        studentValidationService.validate(body);
+        studentValidationService.validateInsert(body);
 
         final Student newStudent = new Student();
         newStudent.setEmail(body.getEmail());
@@ -95,24 +92,9 @@ public class StudentService implements CrudService<StudentDTO> {
     @Transactional
     public StudentDTO update(Long id, StudentRegisterRequest body) {
 
-        final String email = body.getEmail();
+        studentValidationService.validateUpdate(body, id);
 
-        Optional<Student> studentOptional = studentRepository.findById(id);
-        if (studentOptional.isEmpty()) {
-            log.warn("Not found student with id {}!", id);
-
-            throw new ResourceNotFoundException(exceptionMessageAccessor.getMessage(RESOURCE_NOT_FOUND, id));
-        }
-
-        boolean emailUsedByOtherUser = studentRepository.existsByEmailAndIdNot(email, id);
-        if (emailUsedByOtherUser) {
-            log.warn("{} is already being used!", email);
-
-            final String existsEmail = exceptionMessageAccessor.getMessage(EMAIL_ALREADY_EXISTS);
-            throw new RegistrationException(existsEmail);
-        }
-
-        Student student = studentOptional.get();
+        Student student = studentRepository.getReferenceById(id);
         student.setEmail(body.getEmail());
         student.setFirstName(body.getFirstName());
         student.setLastName(body.getLastName());
@@ -174,13 +156,6 @@ public class StudentService implements CrudService<StudentDTO> {
 
         final Student student = studentOptional.get();
         final Class aClass = classOptional.get();
-        final Set<Class> aClassSet = student.getAClass();
-        final Set<Student> students = aClass.getStudents();
-
-        if (aClassSet.contains(aClass) || students.contains(student)) {
-
-            return generalMessageAccessor.getMessage(STUDENT_ENROLLED);
-        }
 
         student.getAClass().remove(aClass);
         aClass.getStudents().remove(student);

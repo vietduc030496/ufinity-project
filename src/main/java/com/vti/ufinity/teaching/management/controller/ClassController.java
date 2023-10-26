@@ -3,7 +3,6 @@ package com.vti.ufinity.teaching.management.controller;
 import com.vti.ufinity.teaching.management.controller.web.request.ClassRegisterRequest;
 import com.vti.ufinity.teaching.management.model.dto.ClassDTO;
 import com.vti.ufinity.teaching.management.service.ClassService;
-import com.vti.ufinity.teaching.management.service.CrudService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

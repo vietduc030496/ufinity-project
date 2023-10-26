@@ -1,14 +1,9 @@
 package com.vti.ufinity.teaching.management.service;
 
-import static com.vti.ufinity.teaching.management.utils.constants.MessageCodeConstants.EMAIL_ALREADY_EXISTS;
-import static com.vti.ufinity.teaching.management.utils.constants.MessageCodeConstants.RESOURCE_NOT_FOUND;
-
 import java.util.List;
 import java.util.Optional;
 
 import com.vti.ufinity.teaching.management.controller.web.request.TeacherRegisterRequest;
-import com.vti.ufinity.teaching.management.exception.RegistrationException;
-import com.vti.ufinity.teaching.management.exception.ResourceNotFoundException;
 import com.vti.ufinity.teaching.management.model.Teacher;
 import com.vti.ufinity.teaching.management.model.dto.TeacherDTO;
 import com.vti.ufinity.teaching.management.model.mapper.TeacherMapper;
@@ -52,7 +47,7 @@ public class TeacherService implements CrudService<TeacherDTO> {
     @Transactional
     public TeacherDTO save(TeacherRegisterRequest body) {
 
-        validationService.validate(body);
+        validationService.validateInsert(body);
 
         final Teacher newTeacher = new Teacher();
         newTeacher.setEmail(body.getEmail());
@@ -80,25 +75,10 @@ public class TeacherService implements CrudService<TeacherDTO> {
     @Transactional
     public TeacherDTO update(Long id, TeacherRegisterRequest body) {
 
-        final String email = body.getEmail();
+        validationService.validateUpdate(body, id);
 
-        Optional<Teacher> teacherOptional = teacherRepository.findById(id);
-        if (teacherOptional.isEmpty()) {
-            log.warn("Not found teacher with id {}!", id);
-
-            throw new ResourceNotFoundException(exceptionMessageAccessor.getMessage(RESOURCE_NOT_FOUND, id));
-        }
-
-        boolean emailUsedByOtherUser = teacherRepository.existsByEmailAndIdNot(email, id);
-        if (emailUsedByOtherUser) {
-            log.warn("{} is already being used!", email);
-
-            final String existsEmail = exceptionMessageAccessor.getMessage(EMAIL_ALREADY_EXISTS);
-            throw new RegistrationException(existsEmail);
-        }
-
-        final Teacher teacher = teacherOptional.get();
-        teacher.setEmail(email);
+        final Teacher teacher = teacherRepository.getReferenceById(id);
+        teacher.setEmail(body.getEmail());
         teacher.setFirstName(body.getFirstName());
         teacher.setLastName(body.getLastName());
         teacher.setDateOfBirth(DateFormatUtils.parse(body.getDateOfBirth()));

@@ -1,5 +1,7 @@
 package com.vti.ufinity.teaching.management.controller.web.request;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
@@ -9,7 +11,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class StudentRegisterRequest {
+public class StudentRegisterRequest implements Serializable {
 
     @Email(message = "{registration_email_is_not_valid}")
     @NotEmpty(message = "{registration_email_not_empty}")

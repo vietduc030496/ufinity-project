@@ -1,9 +1,5 @@
 package com.vti.ufinity.teaching.management.utils.message;
 
-import java.util.Locale;
-import java.util.Objects;
-
-import com.vti.ufinity.teaching.management.utils.constants.ProjectConstants;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
